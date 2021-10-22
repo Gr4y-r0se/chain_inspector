@@ -9,9 +9,11 @@ while [[ $string ]]; do
   string=${string#*"$delimiter"}
 done
 for value in ${myarray[@]}
-do
-	echo "$value-----END CERTIFICATE-----" | openssl x509 -noout -text | grep "Subject: " 
+do 
 	echo -n '    '
+	echo "$value-----END CERTIFICATE-----" | openssl x509 -noout -text | grep "Subject: " 
+	echo "$value-----END CERTIFICATE-----" | openssl x509 -noout -text | grep "Not After"
+	echo -n '        '
 	echo "$value-----END CERTIFICATE-----" | openssl x509 -noout -text | grep "Signature Algorithm" | uniq
 	printf "\n"
 done
